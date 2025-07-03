@@ -142,4 +142,4 @@ You can test locally with different user interactions and analyze how the model 
 
 ## 🤝 Credits
 
-Built by **Rohit Arora** (Lead, Tech Club) and junior team members as a learning project to understand **AI in production-level recommender systems**.
+Built by **Rohit Arora** (Core Member, Tech Club) and their team members(Names) as a learning project to understand **AI in production-level recommender systems**.
