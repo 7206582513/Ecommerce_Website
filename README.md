@@ -1,145 +1,165 @@
 
-# 🛍️ AI-Powered Product Recommendation System for E-commerce
+# 🛒 Ecommerce AI: Smart Product Recommendation Platform
 
-Welcome to the AI Recommendation Engine project built by [Team Tech Club]! This system recommends the most relevant products to users based on their behavior — like viewing, adding to cart, or purchasing products.
+Welcome to the **AI-Powered Ecommerce Platform** — a fully functional system built with FastAPI, Machine Learning, and NLP that recommends the right products to users based on their activity like views, cart, or wishlist.
 
-## 💡 Project Overview
+This project is created for educational and hackathon purposes under the guidance of Rohit Arora (Tech Club Lead), and is designed to help juniors learn the fundamentals of recommendation systems in a production-like setup.
 
-This is a smart product recommendation system for an e-commerce platform (focused on fashion/women’s products). It uses **collaborative filtering** and **user interaction logs** to suggest personalized items during:
+---
 
-- 🔍 Product Search  
-- ❤️ Wishlist 
-- 🛒 Add to Cart  
-- 📦 Order Completion
+## 🚀 Project Features
 
-We built this system to simulate how real-world e-commerce giants like Amazon, Myntra, etc., serve smart product recommendations to users.
+| Module                   | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| ✅ Personalized Recs      | Collaborative filtering using user/item similarity                         |
+| 🔁 Cold Start Solution     | Recommend products for new users using demographics or content             |
+| 🤖 Chat Assistant (Optional)| Ask product queries like “show me watches under ₹1000” using LLM (Groq API)|
+| 🧠 NLP Keyword Search     | Users can search using keywords or tags                                    |
+| 📊 Logs Everything        | Every user click tracked for analytics and training                        |
 
-## 🧠 Features of the System
+---
 
-✔️ Track user interactions like **view**, **add to cart**, **wishlist**, **purchase**  
-✔️ Store interactions with **timestamps**  
-✔️ Use **machine learning** to recommend top-N products  
-✔️ Solve **cold start** using **popularity-based fallback**  
-✔️ Show recommendations in real-time
-
-## 📂 Folder Structure
+## 📁 Folder Structure
 
 ```
-ecommerce_ai/
+ecommerce_ai_project/
 │
-├── datasets/                  # Synthetic datasets for users, items, and interactions
-│   ├── users.csv
-│   ├── products.csv
-│   └── interactions.csv
-│
-├── backend/
-│   ├── app.py                 # Main FastAPI server
-│   ├── recommender.py         # ML recommendation engine (collaborative filtering logic)
-│   ├── logger.py              # Logs user actions on click
-│   └── database.py            # Data storage layer (SQLite)
+├── backend/                  → Main FastAPI backend + ML logic
+│   ├── main.py              → API and server
+│   ├── recommender.py       → Collaborative filtering models
+│   ├── cold_start.py        → Handles new users/items (cold start)
+│   ├── nlp_utils.py         → NLP search & keyword extraction
+│   ├── db_models.py         → SQLAlchemy DB models
+│   ├── product_utils.py     → Filter/sort/rank products
+│   ├── chat_assistant.py    → Optional Groq API logic
+│   └── utils.py             → Similarity metrics, helpers
 │
 ├── frontend/
-│   ├── index.html             # Sample product UI
-│   └── main.js                # Fetches and displays recommendations
+│   ├── templates/           → HTML Pages
+│   │   ├── index.html       → Homepage
+│   │   ├── product.html     → Product details
+│   │   ├── results.html     → Recommendation display
+│   │   └── chat.html        → Chat interface
+│   ├── static/
+│   │   ├── css/style.css    → Styles (Bootstrap/Tailwind)
+│   │   ├── js/main.js       → JavaScript logic
+│   │   └── images/          → Product/user images
 │
-├── notebooks/
-│   └── recommender_training.ipynb  # Jupyter notebook to train & test models
+├── data/
+│   ├── users.csv            → Sample users (age, gender, location)
+│   ├── products.csv         → Sample products (name, category, price)
+│   └── interactions.csv     → Clicks, wishlist, cart, etc.
 │
-├── README.md
-└── requirements.txt
+├── models/
+│   └── collaborative_model.pkl → Trained similarity matrix/model
+│
+├── tests/
+│   └── test_recommender.py  → Unit tests for recommendation logic
+│
+├── requirements.txt         → Python dependencies
+├── .gitignore               → Ignored files like .env, logs, .pyc
+└── README.md                → 📘 You're reading it!
 ```
 
-## 🔧 Tech Stack
+---
 
-- **Backend**: Python + FastAPI  
-- **Frontend**: HTML + JS (can be upgraded with React)  
-- **Database**: SQLite / PostgreSQL  
-- **ML Model**: Cosine similarity-based collaborative filtering  
-- **Logging**: API-based interaction logging for every click
-
-## 📊 Dataset Structure
-
-| Dataset       | Description                         |
-|---------------|-------------------------------------|
-| `users.csv`   | User ID, location, age, gender      |
-| `products.csv`| Product ID, category, brand, price  |
-| `interactions.csv` | User, Product, Action (view/add/purchase), Timestamp |
-
-## 🚀 How It Works (Architecture)
-
-```
-User Interaction (clicks/views/adds)
-        ⬇
-Main Website (Frontend)
-        ⬇
-API Call to /log_interaction
-        ⬇
-Interaction Logger → Store in DB
-        ⬇
-ML Model (Collaborative Filtering)
-        ⬇
-Fetch top-N products
-        ⬇
-Show recommendations
-```
-
-## 🧪 How to Run the Project
+## 🔧 Installation Guide
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ecommerce_ai.git
-cd ecommerce_ai
+git clone https://github.com/your-username/ecommerce_ai_project.git
+cd ecommerce_ai_project
 ```
 
-### 2. Create a Virtual Environment
+### 2. Setup Virtual Environment
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate        # Linux/Mac
+# OR
+.venv\Scripts\activate           # Windows
 ```
 
-### 3. Install Requirements
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Start Backend Server
+### 4. Start the Backend Server
 
 ```bash
 cd backend
-uvicorn app:app --reload
+uvicorn main:app --reload
 ```
 
-### 5. Open Frontend
+Access API at: [http://localhost:8000](http://localhost:8000)
 
-Just open `frontend/index.html` in your browser.
+### 5. Run Frontend
 
-## 📚 Learning Objectives for Juniors
+Open `frontend/templates/index.html` manually in browser. Or serve with Flask/Express if needed.
 
-1. Understand how real product recommendation systems work  
-2. Learn how to build collaborative filtering using Python  
-3. Learn backend APIs and data logging using FastAPI  
-4. Work with interaction datasets  
-5. Build full-stack applications in a team
+---
 
-## 🙋 Contribution Guide
+## 🧪 Sample Data Preview
 
-If you're working in a group:
-- Person 1 → Backend API + FastAPI logging
-- Person 2 → ML recommender logic (cosine similarity)
-- Person 3 → Frontend UI + display recommended products
+### `users.csv`
+| user_id | age | gender | location |
+|---------|-----|--------|----------|
+| U001    | 23  | F      | Delhi    |
+| U002    | 31  | M      | Mumbai   |
 
-You can test locally with different user interactions and analyze how the model recommends changes!
+### `products.csv`
+| product_id | name         | category | price |
+|------------|--------------|----------|-------|
+| P101       | Jeans        | Fashion  | 1299  |
+| P102       | Smart Watch  | Gadgets  | 1999  |
 
-## 🏁 Future Enhancements
+### `interactions.csv`
+| user_id | product_id | action       | timestamp           |
+|---------|------------|--------------|---------------------|
+| U001    | P101       | view         | 2025-07-03 12:01:00 |
+| U001    | P102       | add_to_cart  | 2025-07-03 12:03:12 |
 
-- Add user login/signup and persistent profiles  
-- Store interaction logs in real-time to PostgreSQL  
-- Add deep learning recommendation (e.g., Matrix Factorization)  
-- Better cold-start handling using item content (category, brand)
+---
 
-## 🤝 Credits
+## 📚 What Juniors Will Learn
 
-Built by **Rohit Arora** (Core Member, Tech Club) and their team members(Names) as a learning project to understand **AI in production-level recommender systems**.
+- Collaborative Filtering (User & Item-based)
+- Handling Cold Start with demographics and content
+- Product ranking using similarity
+- Tracking interaction logs
+- Frontend integration with backend via FastAPI
+- Bonus: Chatbot with Groq/OpenAI API (optional)
+
+---
+
+## ✨ Credits
+
+| Name         | Role                      |
+|--------------|---------------------------|
+| **Rohit Arora** | Lead Developer / Mentor     |
+| Junior Dev 1 | Frontend Developer         |
+| Junior Dev 2 | API Integrator + Logger    |
+| Junior Dev 3 | ML Tuner + Data Analyst    |
+
+---
+
+## 💬 Contact
+
+If you’re stuck or want guidance, feel free to reach out to **Rohit Arora** via:
+- WhatsApp group (ask first)
+- 📞 Preferably call for quick explanation
+
+---
+
+## 🔥 Bonus Ideas
+
+- Integrate Stripe or Razorpay for checkout simulation
+- Add login/register system with Flask-Login
+- Deploy with Railway, Vercel or Replit
+
+---
+
+> “This project isn’t just about code — it’s about building something real. Learn the why, not just the how.” – Rohit
